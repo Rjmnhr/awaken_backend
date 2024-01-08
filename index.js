@@ -4,10 +4,11 @@ const dotenv = require("dotenv");
 const Cors = require("cors");
 const otpAuth = require("./routes/otp-auth");
 const user = require("./routes/user");
+const checkoutRoutes = require("./routes/checkout");
 
 //App config
 const app = express();
-const port = process.env.PORT || 8002;
+const port = process.env.PORT || 8003;
 
 //middleware
 dotenv.config();
@@ -22,5 +23,6 @@ mongoose
 
 app.use("/api/otp", otpAuth);
 app.use("/api/user", user);
+app.use(checkoutRoutes);
 
 app.listen(port, () => console.log(`server is up on ${port}`));
