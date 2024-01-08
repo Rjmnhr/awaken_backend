@@ -5,6 +5,7 @@ const Cors = require("cors");
 const otpAuth = require("./routes/otp-auth");
 const user = require("./routes/user");
 const checkoutRoutes = require("./routes/checkout");
+const CompletionRoutes= require("./routes/completion")
 
 //App config
 const app = express();
@@ -23,6 +24,7 @@ mongoose
 
 app.use("/api/otp", otpAuth);
 app.use("/api/user", user);
+app.use("/api/completion", CompletionRoutes);
 app.use(checkoutRoutes);
 
 app.listen(port, () => console.log(`server is up on ${port}`));

@@ -18,35 +18,36 @@ router.post("/send-otp", (req, res) => {
   const transporter = nodemailer.createTransport({
     service: "Gmail", // Example: 'Gmail' or 'SMTP'
     auth: {
-      user: "team@equipaypartners.com",
+      user: "awaken.ansua.dutta@gmail.com",
       pass: process.env.AWAKEN_MAIL_APP_PASS,
     },
   });
 
   // Set up email data
   const mailOptions = {
-    from: "team@equipaypartners.com",
+    from: "awaken.ansua.dutta@gmail.com",
     to: email,
     subject: "Your One-Time Password (OTP) for Awaken",
     text: `Thank you for using Awaken. To complete your login or verification process, please use the following one-time password (OTP):
     
-Your OTP: ${otp}
+  Your OTP: ${otp}
   
-Please enter this OTP on our platform within the next 5 minutes to verify your identity and gain access to your account or complete your requested action.
-    
-Security Reminder:
-
-Keep this OTP confidential, and do not share it with anyone, including our support team.
-We will never ask you for your OTP through email, phone, or any other means. If you receive such a request, please report it to us immediately.
-
-
-Thank you for choosing Awaken.
-
-Best regards,
-The Awaken Team
-    
-    `,
+  Please enter this OTP on our platform within the next 5 minutes to verify your identity and gain access to your account or complete your requested action.
+  
+  Security Reminder:
+  
+  Keep this OTP confidential, and do not share it with anyone, including our support team.
+  We will never ask you for your OTP through email, phone, or any other means. If you receive such a request, please report it to us immediately.
+  
+  Please ignore this message if the login or verification attempt was not initiated by you.
+  
+  Thank you for choosing Awaken.
+  
+  Best regards,
+  The Awaken Team
+  `,
   };
+  
 
   // Send the email
   transporter.sendMail(mailOptions, (error) => {
