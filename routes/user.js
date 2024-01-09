@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 
 const notifyUser = (email, first_name, password) => {
+  console.log("🚀 ~ notifyUser ~ email:", email);
   // Create a Nodemailer transporter
   const transporter = nodemailer.createTransport({
     service: "Gmail", // Example: 'Gmail' or 'SMTP'
@@ -19,34 +20,29 @@ const notifyUser = (email, first_name, password) => {
     from: "awaken.ansua.dutta@gmail.com",
     to: email,
     subject: "Welcome to Awaken",
-    text: `Dear ${first_name} 
-      
-I am so glad that you have signed up to learning about tools to help you create the life you deserve and dream of. 
-
-Awaken is created to take you through 4 pillars of your life as you traverse your midlife waters, so you can get to know yourself better, thus feeling empowered to take steps that will lead you to more joy and more abundance in your life.
-
-Watch this welcome video https://youtu.be/enRANjQgg-g
-
-Your credentials for joining are here:
-
-Email : ${email}
-Password : ${password}
-
-Please join our Facebook group page, especially designed for midlifers to share, and encourage each other on our journeys. I can’t wait to see you there.
-
-As always, feel free to reach out if you have questions and comments. I am always keen to hear from you.
-
-Enjoy discovering yourself and I am honored to be your guide!
-
-Love and light,
-Ansua
-Awaken
-
-
-      
-      `,
+    html: `
+    <div style="text-align: center;">
+    <div style="height: 70%; background: url(https://res.cloudinary.com/dsw1ubwyh/image/upload/v1704825641/nrc266m8t7ft6o2hmv89.jpg); background-repeat: no-repeat; background-size: cover; background-position: center; display: grid; place-items: center; position: relative;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(250, 250, 250, 0.5);">
+        </div>
+        <h2 style="font-weight: 500; font-family: 'Marmelad', sans-serif; font-size: 80px; z-index: 1; color:white" class="mb-3">Awaken</h2>
+      </div>
+    </div>
+    
+    <p>Dear ${first_name},</p>
+    <p>I am so glad that you have signed up to learning about tools to help you create the life you deserve and dream of.</p>
+    <p>Awaken is created to take you through 4 pillars of your life as you traverse your midlife waters, so you can get to know yourself better, thus feeling empowered to take steps that will lead you to more joy and more abundance in your life.</p>
+    <a href="https://youtu.be/enRANjQgg-g"> Watch this welcome video here</a>
+    <p>Your credentials for joining are here:</p>
+    <p>Email: ${email}</p>
+    <p>Password: ${password}</p>
+    <p>Please join our <a href="https://www.facebook.com/groups/733711701964744/"> Facebook group page</a>, especially designed for midlifers to share and encourage each other on our journeys. I can’t wait to see you there.</p>
+    <p>As always, feel free to reach out if you have questions and comments. I am always keen to hear from you.</p>
+    <p>Enjoy discovering yourself, and I am honored to be your guide!</p>
+    <p>Love and light,<br>Ansua<br>Awaken</p>
+  `,
   };
-  console.log("enter 2");
+
   // Send the email
   transporter.sendMail(mailOptions, (error) => {
     if (error) {
@@ -57,6 +53,7 @@ Awaken
     }
   });
 };
+
 //signup
 router.post("/signup", async (req, res) => {
   const { first_name, last_name, email, password } = req.body;

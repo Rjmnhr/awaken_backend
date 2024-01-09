@@ -5,7 +5,7 @@ const Cors = require("cors");
 const otpAuth = require("./routes/otp-auth");
 const user = require("./routes/user");
 const checkoutRoutes = require("./routes/checkout");
-const CompletionRoutes= require("./routes/completion")
+const CompletionRoutes = require("./routes/completion");
 
 //App config
 const app = express();
