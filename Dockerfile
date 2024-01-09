@@ -14,7 +14,7 @@ RUN npm install
 COPY . /app/
 
 # Expose the port used by the backend server
-EXPOSE 8002
+EXPOSE 8003
 
 # Define the entry point for the container
 CMD ["node", "index.js"]
