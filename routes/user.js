@@ -31,7 +31,7 @@ const notifyUser = (email, first_name, password) => {
     <p>Dear ${first_name},</p>
     <p>I am so glad that you have signed up to learning about tools to help you create the life you deserve and dream of.</p>
     <p>Awaken is created to take you through 4 pillars of your life as you traverse your midlife waters, so you can get to know yourself better, thus feeling empowered to take steps that will lead you to more joy and more abundance in your life.</p>
-    <a href="https://youtu.be/enRANjQgg-g"> Watch this welcome video here</a>
+    <a href="https://youtu.be/enRANjQgg-g"> Watch this welcome video </a>
     <p>Your credentials for joining are here:</p>
     <p>Email: ${email}</p>
     <p>Password: ${password}</p>
