@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 
 const notifyUser = (email, first_name, password) => {
-  console.log("🚀 ~ notifyUser ~ email:", email);
   // Create a Nodemailer transporter
   const transporter = nodemailer.createTransport({
     service: "Gmail", // Example: 'Gmail' or 'SMTP'
