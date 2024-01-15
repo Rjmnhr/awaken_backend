@@ -7,7 +7,7 @@ const otpCache = new NodeCache();
 
 router.post("/send-otp", (req, res) => {
   const { email } = req.body;
-
+  console.log("sending mail");
   const secret = otplib.authenticator.generateSecret();
   const otp = otplib.authenticator.generate(secret);
 
@@ -25,7 +25,7 @@ router.post("/send-otp", (req, res) => {
 
   // Set up email data
   const mailOptions = {
-    from: "awaken.ansua.dutta@gmail.com",
+    from: "Awaken <awaken.ansua.dutta@gmail.com>",
     to: email,
     subject: "Your One-Time Password (OTP) for Awaken",
     text: `Thank you for using Awaken. To complete your login or verification process, please use the following one-time password (OTP):
@@ -47,7 +47,6 @@ router.post("/send-otp", (req, res) => {
   The Awaken Team
   `,
   };
-  
 
   // Send the email
   transporter.sendMail(mailOptions, (error) => {

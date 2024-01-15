@@ -3,6 +3,48 @@ const User = require("../models/user-model");
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
+const notifyAdmin = (email, first_name, last_name) => {
+  // Create a Nodemailer transporter
+  const transporter = nodemailer.createTransport({
+    service: "Gmail", // Example: 'Gmail' or 'SMTP'
+    auth: {
+      user: "awaken.ansua.dutta@gmail.com",
+      pass: process.env.AWAKEN_MAIL_APP_PASS,
+    },
+  });
+
+  // Set up email data
+  const mailOptions = {
+    from: "Awaken <awaken.ansua.dutta@gmail.com>",
+    to: "cantadora@ansua.de , indradeep.mazumdar@gmail.com, renjith.cm@refactor.academy",
+    subject: "New Registration",
+    text: `Hello Awaken,
+    
+We are pleased to inform you that a new customer has registered on our platform. Below are the details of the new customer:
+        
+Name: ${first_name} ${last_name}
+Email : ${email}
+       
+        
+This new customer has expressed interest in our services and products.
+    
+Thank you for your attention, and let's work together to ensure our new customer has a great experience with our product.
+        
+Regards,
+Awaken
+      `,
+  };
+
+  // Send the email
+  transporter.sendMail(mailOptions, (error) => {
+    if (error) {
+      console.error("Error sending email:", error);
+    } else {
+      console.log("enter 3");
+      console.log("email sent successfully");
+    }
+  });
+};
 
 const notifyUser = (email, first_name, password) => {
   // Create a Nodemailer transporter
@@ -16,7 +58,7 @@ const notifyUser = (email, first_name, password) => {
 
   // Set up email data
   const mailOptions = {
-    from: "awaken.ansua.dutta@gmail.com",
+    from: "Awaken <awaken.ansua.dutta@gmail.com>",
     to: email,
     subject: "Welcome to Awaken",
     html: `
@@ -32,9 +74,8 @@ const notifyUser = (email, first_name, password) => {
     <p>I am so glad that you have signed up to learning about tools to help you create the life you deserve and dream of.</p>
     <p>Awaken is created to take you through 4 pillars of your life as you traverse your midlife waters, so you can get to know yourself better, thus feeling empowered to take steps that will lead you to more joy and more abundance in your life.</p>
     <a href="https://youtu.be/enRANjQgg-g"> Watch this welcome video </a>
-    <p>Your credentials for joining are here:</p>
-    <p>Email: ${email}</p>
-    <p>Password: ${password}</p>
+
+ 
     <p>Please join our <a href="https://www.facebook.com/groups/733711701964744/"> Facebook group page</a>, especially designed for midlifers to share and encourage each other on our journeys. I can’t wait to see you there.</p>
     <p>As always, feel free to reach out if you have questions and comments. I am always keen to hear from you.</p>
     <p>Enjoy discovering yourself, and I am honored to be your guide!</p>
@@ -70,6 +111,7 @@ router.post("/signup", async (req, res) => {
   try {
     const user = await userData.save();
     if (user) {
+      notifyAdmin(email, first_name, last_name);
       notifyUser(email, first_name, password);
     }
 
