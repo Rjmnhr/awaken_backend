@@ -7,7 +7,7 @@ const otpCache = new NodeCache();
 
 router.post("/send-otp", (req, res) => {
   const { email } = req.body;
-  console.log("sending mail");
+
   const secret = otplib.authenticator.generateSecret();
   const otp = otplib.authenticator.generate(secret);
 

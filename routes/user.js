@@ -40,7 +40,6 @@ Awaken
     if (error) {
       console.error("Error sending email:", error);
     } else {
-      console.log("enter 3");
       console.log("email sent successfully");
     }
   });
@@ -88,7 +87,6 @@ const notifyUser = (email, first_name, password) => {
     if (error) {
       console.error("Error sending email:", error);
     } else {
-      console.log("enter 3");
       console.log("email sent successfully");
     }
   });
@@ -167,6 +165,34 @@ router.post("/check", async (req, res) => {
       // User with the provided email does not exist
       return res.status(200).json({ exists: false });
     }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// Reset or Update Password
+router.post("/reset-password", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Find the user by email
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Update the password
+    user.password = CryptoJS.AES.encrypt(
+      password,
+      process.env.SECRET_KEY
+    ).toString();
+
+    // Save the updated user
+    const updatedUser = await user.save();
+
+    res.status(200).json({ message: "Password updated successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
