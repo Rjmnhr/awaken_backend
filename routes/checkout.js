@@ -20,9 +20,10 @@ router.get("/checkout-session", async (req, res) => {
 });
 
 router.post("/create-checkout-session", async (req, res) => {
-  const domainURL = process.env.DOMAIN;
+  const { price, product } = req.body;
 
-  const { price } = req.body;
+  const domainURL =
+    product === "workshop" ? process.env.WORKSHOP_DOMAIN : process.env.DOMAIN;
 
   let successRoute = "success.html";
 
@@ -99,7 +100,6 @@ router.post("/create-checkout-session", async (req, res) => {
 
 // Webhook handler for asynchronous events.
 router.post("/webhook", async (req, res) => {
-  console.log("🚀 ~ file: checkout.js:141 ~ router.post ~ req:", req.body);
   let event;
 
   // Check if webhook signing is configured.
