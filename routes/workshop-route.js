@@ -1,20 +1,20 @@
 const router = require("express").Router();
 const nodemailer = require("nodemailer");
-const notifyAdmin = (email, first_name, last_name, phone) => {
+const notifyAdmin = (email, first_name, last_name, newsletter) => {
   // Create a Nodemailer transporter
   const transporter = nodemailer.createTransport({
     service: "Gmail", // Example: 'Gmail' or 'SMTP'
     auth: {
-      user: "awaken.ansua.dutta@gmail.com",
+      user: "ansua.dutta.coaching@gmail.com",
       pass: process.env.AWAKEN_MAIL_APP_PASS,
     },
   });
 
   // Set up email data
   const mailOptions = {
-    from: "Awaken <awaken.ansua.dutta@gmail.com>",
+    from: "Ansua <ansua.dutta.coaching@gmail.com>",
     // to: "cantadora@ansua.de , indradeep.mazumdar@gmail.com, renjith.cm@refactor.academy",
-    to: "renjith.cm@refactor.academy",
+    to: "renjith.cm@refactor.academy, cantadora@ansua.de ",
     subject: "Workshop Product Purchase",
     text: `Hello Admin,
     
@@ -22,7 +22,7 @@ We are pleased to inform you that a new customer has purchased the workshop prod
         
 Name: ${first_name} ${last_name}
 Email : ${email}
-Phone : ${phone}
+Newsletter : ${newsletter}
                
       `,
   };
@@ -42,14 +42,14 @@ const notifyUser = (email, first_name, password) => {
   const transporter = nodemailer.createTransport({
     service: "Gmail", // Example: 'Gmail' or 'SMTP'
     auth: {
-      user: "awaken.ansua.dutta@gmail.com",
+      user: "ansua.dutta.coaching@gmail.com",
       pass: process.env.AWAKEN_MAIL_APP_PASS,
     },
   });
 
   // Set up email data
   const mailOptions = {
-    from: "Awaken <awaken.ansua.dutta@gmail.com>",
+    from: "Ansua <ansua.dutta.coaching@gmail.com>",
     to: email,
     subject: "Welcome to Awaken",
     html: `
@@ -60,16 +60,56 @@ const notifyUser = (email, first_name, password) => {
         <h2 style="font-weight: 500; font-family: 'Marmelad', sans-serif; font-size: 80px; z-index: 1; color:white" class="mb-3">Workshop</h2>
       </div>
     </div>
+    <br/>
+<div>
+    <center>
     
-    <p>Dear ${first_name},</p>
+    <h3 >Thank you for signing up for </h3>
+    
+
+    <h2 style="margin: 0;">Unlocking Your Inner Wisdom </h2>
+    <h3>A Journey into Listening and Harnessing Inner Guidance </h3>
 
 
-    <p>Your Payment is Successful!</p>
-    <p>I am so glad that you have purchased out Workshop product.</p>
-    <p>You will be receiving your payment receipt shortly</p>
+    <h2>23rd March Saturday 4PM GMT +1 (Paris)</h2>
+    <h2>11AM EST (New York)/ 8:30PM IST (India) </h2>
+  
+
+    <h3>Zoom link is below</h3>
+    
+    <h2>Payment of EUR 20 received with thanks!</h2>
+    
+    <h3 style="margin: 0">Bring your journal and markers/pens/pencils and water.</h3>
+    <h3> Sweatpants welcome!</h3>
+
+    
+    <h3>Set a reminder and set this time aside for yourself and your inner wisdom. 
+
+    I can’t wait to see you all!</h3>
+
+
+    <h3>If you run into any problem please contact at ansua.dutta.coaching@gmail.com</h3>
 
    
-    <>Love and light,<br>Ansua
+    Love and light,<br>Ansua
+
+
+    <h3>Ansua Dutta is inviting you to a scheduled Zoom meeting.</h3>
+    <h3>Topic: Unlocking your Inner Wisdom Workshop</h3>
+    <h3>Time: Mar 23, 2024 04:00 PM Paris</h3>
+    <a href="https://us06web.zoom.us/j/81063196977?pwd=IpJdKLlWZ7hE49GCznUDQIp1nXLb8D.1">Join Zoom Meeting</a>
+    <h3>Meeting ID: 810 6319 6977</h3>
+    <h3>Passcode: 145635</h3>
+
+
+
+    <a href="https://www.ansuadutta.com/">Check out my website</a>
+
+    </center>
+
+
+
+    </div>
   `,
   };
 
@@ -84,10 +124,10 @@ const notifyUser = (email, first_name, password) => {
 };
 
 router.post("/sendEmail", async (req, res) => {
-  const { first_name, last_name, email, phone } = req.body;
+  const { first_name, last_name, email, newsletter } = req.body;
 
   try {
-    notifyAdmin(email, first_name, last_name, phone);
+    notifyAdmin(email, first_name, last_name, newsletter);
     notifyUser(email, first_name);
 
     res.status(200).json(user);
