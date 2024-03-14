@@ -14,7 +14,7 @@ const notifyAdmin = (email, first_name, last_name, newsletter) => {
   const mailOptions = {
     from: "Ansua <ansua.dutta.coaching@gmail.com>",
     // to: "cantadora@ansua.de , indradeep.mazumdar@gmail.com, renjith.cm@refactor.academy",
-    to: "renjith.cm@refactor.academy, cantadora@ansua.de ",
+    to: "renjith.cm@refactor.academy ",
     subject: "Workshop Product Purchase",
     text: `Hello Admin,
     

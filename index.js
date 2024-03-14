@@ -10,7 +10,7 @@ const workshopRoutes = require("./routes/workshop-route");
 
 //App config
 const app = express();
-const port = process.env.PORT || 8003;
+const port = process.env.PORT || 8000;
 
 //middleware
 dotenv.config();
